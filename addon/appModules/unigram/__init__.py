@@ -1,34 +1,30 @@
 # -*- coding: UTF-8 -*-
 
 
+from typing import Callable
 
-import api
 import appModuleHandler
-from scriptHandler import script
-from logHandler import log
 import tones
-import controlTypes
+from NVDAObjects.UIA import UIA
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_nameChange(self, object, nextHandler):
+	def event_nameChange(self, object: UIA, nextHandler: Callable) -> None:
 		self.sayIsTyping(object)
 		nextHandler()
-	
-	def sayIsTyping(self, object):
+
+	def sayIsTyping(self, object: UIA) -> None:
 		status = self.getObjectName(object)
-		log.info(status)
 		if status is None:
 			return
 		if self.isUserTyping(status):
 			self.playSound()
 
-	def playSound(self):
+	def playSound(self) -> None:
 		tones.beep(256, 100)
 
-	def isUserTyping(self, status):
+	def isUserTyping(self, status: str) -> bool:
 		return 'печатает...' in status
 
-	def getObjectName(self, object):
-		return object.name.encode('UTF-8')
-		
+	def getObjectName(self, object: UIA) -> str:
+		return object.name
