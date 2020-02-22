@@ -21,6 +21,7 @@ jobs:
       - name: build
         run: |
           scons
+      - name: upload ad-don
         uses: actions/upload-artifact@v1
         with:
           name: addon1
