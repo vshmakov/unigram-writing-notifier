@@ -24,5 +24,5 @@ jobs:
       - name: upload ad-don
         uses: actions/upload-artifact@v1
         with:
-          name: addon1
+          #name: addon1
           path: unigram-writing-notifier-1.0.nvda-addon
