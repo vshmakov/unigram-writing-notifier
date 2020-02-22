@@ -4,12 +4,10 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [2.7, 3.7]
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -23,3 +21,7 @@ jobs:
       - name: build
         run: |
           scons
+        uses: actions/upload-artifact@v1
+        with:
+          name: addon1
+          path: unigram-writing-notifier-1.0.nvda-addon
